@@ -8,4 +8,6 @@
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")
 
+ zpm "install pex-embbeded-python" 
+
 halt
