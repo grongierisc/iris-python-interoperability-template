@@ -27,5 +27,3 @@ class FileOperation(grongier.pex.BusinessOperation):
         self.Adapter.PutLine(filename, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
 
         return 1
-
-iris.cls("Grongier.PEX.Utils").RegisterComponent("FileOperation","FileOperationWithIrisAdaptor","/irisdev/app/src/python/Demo",1,"PEX.FileOperation")
