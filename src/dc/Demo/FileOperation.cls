@@ -19,10 +19,12 @@ Method WriteToFile(pRequest As dc.Demo.PostMessage, Output pResponse As Ens.Resp
     }
     Set line = ts_" : "_title_" : "_author_" : "_url
     Set filename = pRequest.Found_".txt" 
+
     $$$QuitOnError(..Adapter.PutLine(filename, line))
     $$$QuitOnError(..Adapter.PutLine(filename, ""))
     $$$QuitOnError(..Adapter.PutLine(filename, text))
     $$$QuitOnError(..Adapter.PutLine(filename, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"))
+    
     Return $$$OK
 }
 
