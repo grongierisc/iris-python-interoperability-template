@@ -19,8 +19,10 @@ class FileOperation(grongier.pex.BusinessOperation):
             url = pRequest.Post.Url
             text = pRequest.Post.Selftext
             ts = iris.cls("%Library.PosixTime").LogicalToOdbc(iris.cls("%Library.PosixTime").UnixTimeToLogical(pRequest.Post.CreatedUTC))
+
         line = ts+" : "+title+" : "+author+" : "+url
         filename = pRequest.Found+".txt" 
+        
         self.Adapter.PutLine(filename, line)
         self.Adapter.PutLine(filename, "")
         self.Adapter.PutLine(filename, text)
