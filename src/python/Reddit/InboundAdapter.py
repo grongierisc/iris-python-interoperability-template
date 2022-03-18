@@ -7,8 +7,11 @@ class RedditInboundAdapter(grongier.pex.InboundAdapter):
     
     def OnInit(self):
         
-        self.Feed = "/new/"
-        self.Limit = str(10)
+        if not hasattr(self,'Feed'):
+            self.Feed = "/new/"
+        
+        if self.Limit is None:
+            raise TypeError('no Limit field')
         
         self.LastPostName = ""
         
@@ -40,10 +43,14 @@ class RedditInboundAdapter(grongier.pex.InboundAdapter):
                 if not updateLast:
                     self.LastPostName = value['data']['name']
                     updateLast = 1
-                response = self.BusinessHost.OnProcessInput(post)
-                
-        except Exception as e: 
-            self.LOGINFO(e.__str__())
-            raise e
+                response = self.BusinessHost.ProcessInput(post)
+        except requests.exceptions.HTTPError as err:
+            if err.response.status_code == 429:
+                self.LOGWARNING(err.__str__())
+            else:
+                raise err
+        except Exception as err: 
+            self.LOGERROR(err.__str__())
+            raise err
 
         return tSC
