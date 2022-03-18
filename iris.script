@@ -5,7 +5,13 @@
  zpm "install pex-embbeded-python" 
  do $System.OBJ.LoadDir("/opt/irisapp/src","ck",,1)
  zpm "install sslclient"
- 
+
+ //Register Python code
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditServiceWithIrisAdaptor","RedditService","/irisdev/app/src/python/Demo/",1,"PEX.RedditServiceWithIrisAdaptor")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditService","RedditService","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"PEX.RedditService")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("InboundAdapter","RedditInboundAdapter","/irisdev/app/src/python/Reddit/|/irisdev/app/src/python/Demo/",1,"PEX.RedditInboundAdapter")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("FileOperationWithIrisAdaptor","FileOperation","/irisdev/app/src/python/Demo/",1,"PEX.FileOperation")
+
 
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")

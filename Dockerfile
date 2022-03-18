@@ -18,3 +18,5 @@ RUN iris start IRIS \
 ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "IRISAPP"
+
+RUN pip3 install requests
