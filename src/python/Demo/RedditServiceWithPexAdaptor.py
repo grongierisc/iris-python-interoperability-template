@@ -7,9 +7,16 @@ class RedditService(grongier.pex.BusinessService):
         """
         Name of the registred adaptor
         """
-        return "PEX.RedditInboundAdapter"
+        return "Python.RedditInboundAdapter"
 
     def OnProcessInput(self, messageInput):
         msg = iris.cls("dc.Demo.PostMessage")._New()
         msg.Post = messageInput
-        return self.SendRequestSync("FilterPosts",msg)
+        return self.SendRequestSync(self.Target,msg)
+
+    def OnInit(self):
+        
+        if not hasattr(self,'Target'):
+            self.Target = "Python.FilterPostRoutingRule"
+        
+        return 1

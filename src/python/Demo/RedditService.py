@@ -20,6 +20,9 @@ class RedditService(grongier.pex.BusinessService):
         
         if not hasattr(self,'Limit'):
             raise TypeError('no Limit field')
+
+        if not hasattr(self,'Target'):
+            self.Target = "Python.FilterPostRoutingRule"
         
         self.LastPostName = ""
         
@@ -31,7 +34,7 @@ class RedditService(grongier.pex.BusinessService):
         if post is not None:
             msg = PostMessage()
             msg.Post = post
-            self.SendRequestAsync("PEX.FilterPostRoutingRule",msg)
+            self.SendRequestAsync(self.Target,msg)
 
     def OnTask(self) -> PostClass:
           
@@ -70,12 +73,3 @@ class RedditService(grongier.pex.BusinessService):
 
         return None
 
-def main():
-    redditService = RedditService()
-    redditService.Limit = "10"
-    redditService.Feed = "/new/"
-    redditService.OnInit()
-    redditService.OnProcessInput("")
-
-if __name__ == "__main__":
-    main()

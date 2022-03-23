@@ -7,15 +7,15 @@
  zpm "install sslclient"
 
  //Register Python code
- zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditServiceWithIrisAdaptor","RedditService","/irisdev/app/src/python/Demo/",1,"PEX.RedditServiceWithIrisAdaptor")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditServiceWithPexAdaptor","RedditService","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"PEX.RedditServiceWithPexAdaptor")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditService","RedditService","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"PEX.RedditService")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("FilterPostRoutingRule","FilterPostRoutingRule","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"PEX.FilterPostRoutingRule")
-
- zw ##class(Grongier.PEX.Utils).RegisterComponent("InboundAdapter","RedditInboundAdapter","/irisdev/app/src/python/Reddit/|/irisdev/app/src/python/Demo/",1,"PEX.RedditInboundAdapter")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("FileOperationWithIrisAdaptor","FileOperation","/irisdev/app/src/python/Demo/",1,"PEX.FileOperation")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("FileOperation","FileOperation","/irisdev/app/src/python/Demo/",1,"PEX.FileOperationTest")
-
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("InboundAdapter","RedditInboundAdapter","/irisdev/app/src/python/Reddit/|/irisdev/app/src/python/Demo/",1,"Python.RedditInboundAdapter")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditServiceWithIrisAdaptor","RedditService","/irisdev/app/src/python/Demo/",1,"Python.RedditServiceWithIrisAdaptor")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditServiceWithPexAdaptor","RedditService","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"Python.RedditServiceWithPexAdaptor")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("RedditService","RedditService","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"Python.RedditService")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("FilterPostRoutingRule","FilterPostRoutingRule","/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/",1,"Python.FilterPostRoutingRule")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("FileOperationWithIrisAdaptor","FileOperation","/irisdev/app/src/python/Demo/",1,"Python.FileOperationWithIrisAdaptor")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("FileOperation","FileOperation","/irisdev/app/src/python/Demo/",1,"Python.FileOperation")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("EmailOperation","EmailOperation","/irisdev/app/src/python/Demo/",1,"Python.EmailOperation")
+ zw ##class(Grongier.PEX.Utils).RegisterComponent("EmailOperationWithIrisAdaptor","EmailOperation","/irisdev/app/src/python/Demo/",1,"Python.EmailOperationWithIrisAdaptor")
 
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")

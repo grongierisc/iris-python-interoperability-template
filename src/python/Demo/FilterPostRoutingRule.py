@@ -6,7 +6,11 @@ from PostMessage import PostMessage
 class FilterPostRoutingRule(grongier.pex.BusinessProcess):
     
     def OnInit(self):
-        return
+        
+        if not hasattr(self,'Target'):
+            self.Target = "Python.FileOperation"
+        
+        return 1
 
     def OnTearDown(self):
         return
@@ -15,11 +19,11 @@ class FilterPostRoutingRule(grongier.pex.BusinessProcess):
         if 'dog'.upper() in request.Post.Selftext.upper():
             request.ToEmailAddress = 'dog@company.com'
             request.Found = 'Dog'
-            self.SendRequestAsync("dc.Demo.FileOperation",request)
+            self.SendRequestAsync(self.Target,request)
         if 'cat'.upper() in request.Post.Selftext.upper():
             request.ToEmailAddress = 'cat@company.com'
             request.Found = 'Cat'
-            self.SendRequestAsync("dc.Demo.FileOperation",request)
+            self.SendRequestAsync(self.Target,request)
         return 
 
     def OnResponse(self, request, response, callRequest, callResponse, pCompletionKey):

@@ -19,4 +19,4 @@ ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "IRISAPP"
 
-RUN pip3 install requests
+RUN pip3 install requests dataclasses-json
