@@ -22,19 +22,26 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="From"></Setting>
     <Setting Target="Adapter" Name="Credentials"></Setting>
   </Item>
-  <Item Name="dc.Demo.FileOperation" Category="" ClassName="PEX.FileOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="dc.Demo.FileOperation" Category="" ClassName="PEX.FileOperationTest" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="Charset">utf-8</Setting>
     <Setting Target="Adapter" Name="FilePath">/irisdev/app/output/</Setting>
+    <Setting Target="Host" Name="%settings">Path=/irisdev/app/output/</Setting>
   </Item>
-  <Item Name="PEX.RedditService" Category="" ClassName="PEX.RedditService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="PEX.RedditService" Category="" ClassName="PEX.RedditService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="%classpaths">/irisdev/app/src/python/Reddit|/irisdev/app/src/python/Demo</Setting>
-    <Setting Target="Adapter" Name="%classpaths">/irisdev/app/src/python/Reddit|/irisdev/app/src/python/Demo</Setting>
+    <Setting Target="Adapter" Name="%classpaths">/irisdev/app/src/python/Demo/|/irisdev/app/src/python/Reddit/</Setting>
     <Setting Target="Adapter" Name="%settings">Limit=10</Setting>
+    <Setting Target="Host" Name="%settings">Limit=10</Setting>
   </Item>
   <Item Name="PEX.RedditServiceWithIrisAdaptor" Category="" ClassName="PEX.RedditServiceWithIrisAdaptor" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Adapter" Name="Feed">/new/</Setting>
     <Setting Target="Adapter" Name="Limit">4</Setting>
     <Setting Target="Adapter" Name="SSLConfig">default</Setting>
+  </Item>
+  <Item Name="PEX.RedditServiceWithPexAdaptor" Category="" ClassName="PEX.RedditServiceWithPexAdaptor" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Adapter" Name="%settings">Limit=3</Setting>
+  </Item>
+  <Item Name="PEX.FilterPostRoutingRule" Category="" ClassName="PEX.FilterPostRoutingRule" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
 </Production>
 }
