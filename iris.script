@@ -17,6 +17,8 @@
  zw ##class(Grongier.PEX.Utils).RegisterComponent("EmailOperation","EmailOperation","/opt/irisapp/src/python/Demo/",1,"Python.EmailOperation")
  zw ##class(Grongier.PEX.Utils).RegisterComponent("EmailOperationWithIrisAdaptor","EmailOperation","/opt/irisapp/src/python/Demo/",1,"Python.EmailOperationWithIrisAdaptor")
  
+ set ^EnsPortal.Settings("SuperUser","LastProduction")	= "dc.Demo.Production"
+ 
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")
 
