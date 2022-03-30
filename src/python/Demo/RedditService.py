@@ -34,7 +34,7 @@ class RedditService(grongier.pex.BusinessService):
         if post is not None:
             msg = PostMessage()
             msg.Post = post
-            self.SendRequestAsync(self.Target,msg)
+            self.SendRequestSync(self.Target,msg)
 
     def OnTask(self) -> PostClass:
           

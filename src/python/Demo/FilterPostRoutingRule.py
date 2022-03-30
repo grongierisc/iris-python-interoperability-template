@@ -19,12 +19,10 @@ class FilterPostRoutingRule(grongier.pex.BusinessProcess):
         if 'dog'.upper() in request.Post.Selftext.upper():
             request.ToEmailAddress = 'dog@company.com'
             request.Found = 'Dog'
-            self.SendRequestAsync(self.Target,request)
         if 'cat'.upper() in request.Post.Selftext.upper():
             request.ToEmailAddress = 'cat@company.com'
             request.Found = 'Cat'
-            self.SendRequestAsync(self.Target,request)
-        return 
+        return self.SendRequestSync(self.Target,request)
 
     def OnResponse(self, request, response, callRequest, callResponse, pCompletionKey):
         return response
