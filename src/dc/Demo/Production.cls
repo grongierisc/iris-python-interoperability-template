@@ -32,7 +32,7 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="FilePath">/irisdev/app/output/</Setting>
     <Setting Target="Host" Name="%settings">Path=/irisdev/app/output/</Setting>
   </Item>
-  <Item Name="Python.FileOperationWithIrisAdaptor" Category="" ClassName="Python.FileOperationWithIrisAdaptor" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="Python.FileOperationWithIrisAdapter" Category="" ClassName="Python.FileOperationWithIrisAdapter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="Charset">utf-8</Setting>
     <Setting Target="Adapter" Name="FilePath">/irisdev/app/output/</Setting>
     <Setting Target="Host" Name="%settings">Path=/irisdev/app/output/</Setting>
@@ -44,7 +44,7 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="From"></Setting>
     <Setting Target="Adapter" Name="Credentials"></Setting>
   </Item>
-  <Item Name="Python.EmailOperationWithIrisAdaptor" Category="" ClassName="Python.EmailOperationWithIrisAdaptor" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="Python.EmailOperationWithIrisAdapter" Category="" ClassName="Python.EmailOperationWithIrisAdapter" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="SMTPPort"></Setting>
     <Setting Target="Adapter" Name="SMTPServer"></Setting>
     <Setting Target="Adapter" Name="SSLConfig"></Setting>
@@ -55,12 +55,12 @@ XData ProductionDefinition
     <Setting Target="Host" Name="%classpaths">/irisdev/app/src/python/Reddit|/irisdev/app/src/python/Demo</Setting>
     <Setting Target="Host" Name="%settings">Limit=10</Setting>
   </Item>
-  <Item Name="Python.RedditServiceWithIrisAdaptor" Category="" ClassName="Python.RedditServiceWithIrisAdaptor" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="Python.RedditServiceWithIrisAdapter" Category="" ClassName="Python.RedditServiceWithIrisAdapter" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Adapter" Name="Feed">/new/</Setting>
     <Setting Target="Adapter" Name="Limit">4</Setting>
     <Setting Target="Adapter" Name="SSLConfig">default</Setting>
   </Item>
-  <Item Name="Python.RedditServiceWithPexAdaptor" Category="" ClassName="Python.RedditServiceWithPexAdaptor" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  <Item Name="Python.RedditServiceWithPexAdapter" Category="" ClassName="Python.RedditServiceWithPexAdapter" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Adapter" Name="%settings">Limit=3</Setting>
   </Item>
   <Item Name="Python.FilterPostRoutingRule" Category="" ClassName="Python.FilterPostRoutingRule" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">

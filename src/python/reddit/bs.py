@@ -1,15 +1,18 @@
-import grongier.pex
+from grongier.pex import BusinessService
+
+import iris
+
 import json
 import requests
 
-from PostMessage import PostMessage
-from Post import PostClass
+from message import PostMessage
+from obj import PostClass
 
-class RedditService(grongier.pex.BusinessService):
+class RedditService(BusinessService):
 
     def getAdapterType():
         """
-        Name of the registred adaptor
+        Name of the registred Adapter
         """
         return "Ens.InboundAdapter"
 
@@ -73,3 +76,43 @@ class RedditService(grongier.pex.BusinessService):
 
         return None
 
+
+class RedditServiceWithIrisAdapter(BusinessService):
+
+    def getAdapterType():
+        """
+        Name of the registred Adapter
+        """
+        return "dc.Reddit.InboundAdapter"
+
+    def OnProcessInput(self, messageInput):
+        msg = iris.cls("dc.Demo.PostMessage")._New()
+        msg.Post = messageInput
+        return self.SendRequestSync(self.Target,msg)
+
+    def OnInit(self):
+        
+        if not hasattr(self,'Target'):
+            self.Target = "Python.FilterPostRoutingRule"
+        
+        return
+
+class RedditServiceWithPexAdapter(BusinessService):
+
+    def getAdapterType():
+        """
+        Name of the registred Adapter
+        """
+        return "Python.RedditInboundAdapter"
+
+    def OnProcessInput(self, messageInput):
+        msg = iris.cls("dc.Demo.PostMessage")._New()
+        msg.Post = messageInput
+        return self.SendRequestSync(self.Target,msg)
+
+    def OnInit(self):
+        
+        if not hasattr(self,'Target'):
+            self.Target = "Python.FilterPostRoutingRule"
+        
+        return
