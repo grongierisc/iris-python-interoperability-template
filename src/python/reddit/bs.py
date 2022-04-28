@@ -107,7 +107,7 @@ class RedditServiceWithPexAdapter(BusinessService):
 
     def on_process_input(self, message_input):
         msg = iris.cls("dc.Demo.PostMessage")._New()
-        msg.post = message_input
+        msg.Post = message_input
         return self.send_request_sync(self.target,msg)
 
     def on_init(self):
