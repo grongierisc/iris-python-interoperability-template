@@ -7,6 +7,15 @@ from obj import PostClass
 @dataclass
 class PostMessage(Message):
 
-    Post:PostClass = None
-    ToEmailAddress:str = None
-    Found:str = None
+    post:PostClass = None
+    to_email_address:str = None
+    found:str = None
+
+@dataclass
+class MyRequest(Message):
+
+    ma_string:str = None
+
+@dataclass
+class MyMessage(Message):
+    toto:str = None

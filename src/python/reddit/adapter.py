@@ -1,34 +1,34 @@
-import grongier.pex
+from grongier.pex import InboundAdapter
 import requests
 import iris
 import json
 
-class RedditInboundAdapter(grongier.pex.InboundAdapter):
+class RedditInboundAdapter(InboundAdapter):
     
-    def OnInit(self):
+    def on_init(self):
         
-        if not hasattr(self,'Feed'):
-            self.Feed = "/new/"
+        if not hasattr(self,'feed'):
+            self.feed = "/new/"
         
-        if self.Limit is None:
+        if self.limit is None:
             raise TypeError('no Limit field')
         
-        self.LastPostName = ""
+        self.last_post_name = ""
         
         return 1
 
-    def OnTask(self):
-        self.LOGINFO(f"LIMIT:{self.Limit}")
-        if self.Feed == "" :
+    def on_task(self):
+        self.LOGINFO(f"LIMIT:{self.limit}")
+        if self.feed == "" :
             return 1
         
         tSC = 1
         # HTTP Request
         try:
             server = "https://www.reddit.com"
-            requestString = self.Feed+".json?before="+self.LastPostName+"&limit="+self.Limit
-            self.LOGINFO(server+requestString)
-            response = requests.get(server+requestString)
+            request_string = self.feed+".json?before="+self.last_post_name+"&limit="+self.limit
+            self.log_info(server+request_string)
+            response = requests.get(server+request_string)
             response.raise_for_status()
 
             data = response.json()
@@ -37,20 +37,20 @@ class RedditInboundAdapter(grongier.pex.InboundAdapter):
             for key, value in enumerate(data['data']['children']):
                 if value['data']['selftext']=="":
                     continue
-                post = iris.cls('dc.Reddit.Post')._New()
+                post = iris.cls('dc.Reddit.post')._New()
                 post._JSONImport(json.dumps(value['data']))
-                post.OriginalJSON = json.dumps(value)
+                post.original_json = json.dumps(value)
                 if not updateLast:
-                    self.LastPostName = value['data']['name']
+                    self.LastpostName = value['data']['name']
                     updateLast = 1
                 response = self.BusinessHost.ProcessInput(post)
         except requests.exceptions.HTTPError as err:
             if err.response.status_code == 429:
-                self.LOGWARNING(err.__str__())
+                self.log_warning(err.__str__())
             else:
                 raise err
         except Exception as err: 
-            self.LOGERROR(err.__str__())
+            self.log_error(err.__str__())
             raise err
 
         return tSC
