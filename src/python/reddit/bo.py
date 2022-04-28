@@ -142,6 +142,6 @@ class MyOperation(BusinessOperation):
 
 if __name__ == "__main__":
     crud_person = EmailOperationWithIrisAdapter()
-    crud_person._dispatchon_init('')
+    crud_person._dispatch_on_init('')
     request = iris.cls('Ens.StringRequest')._New('toto')
-    response = crud_person._dispatchon_messag(request)
+    response = crud_person._dispatch_on_message(request)
