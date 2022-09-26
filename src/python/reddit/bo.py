@@ -6,6 +6,8 @@ import iris
 import os
 import datetime
 
+from message import PostMessage
+
 class FileOperation(BusinessOperation):
     """
     This operation receive a PostMessage and write down in the right company
@@ -15,7 +17,10 @@ class FileOperation(BusinessOperation):
         if hasattr(self,'path'):
             os.chdir(self.path)
 
-    def on_message(self, request):
+    def on_post_message(self, request: PostMessage):
+        """
+        This method is called when a PostMessage is received.
+        """
         
         ts = title = author = url = text = ""
 

@@ -20,6 +20,9 @@ class FilterPostRoutingRule(BusinessProcess):
         return
 
     def on_python_message(self, request: PostMessage):
+        """
+        This method is called when a PostMessage is received.
+        """
         if 'dog'.upper() in request.post.selftext.upper():
             request.to_email_address = 'dog@company.com'
             request.found = 'Dog'
