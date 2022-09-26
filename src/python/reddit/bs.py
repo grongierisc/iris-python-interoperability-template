@@ -9,8 +9,12 @@ from message import PostMessage
 from obj import PostClass
 
 class RedditService(BusinessService):
-
-    def getAdapterType():
+    """
+    This service use an Ens.InboundAdapter to, on_process_input every 5
+    seconds, use requests to fetch self.limit posts as data from the reddit
+    API before calling the FilterPostRoutingRule process.
+    """
+    def get_adapter_type():
         """
         Name of the registred Adapter
         """
@@ -45,7 +49,7 @@ class RedditService(BusinessService):
             server = "https://www.reddit.com"
             request_string = self.feed+".json?before="+self.last_post_name+"&limit="+self.limit
 
-            response = requests.get(server+request_string)
+            # response = requests.get(server+request_string)
             # response.raise_for_status()
 
             # data = response.json()
@@ -78,8 +82,11 @@ class RedditService(BusinessService):
 
 
 class RedditServiceWithIrisAdapter(BusinessService):
-
-    def getAdapterType():
+    """
+    This service use our objectscript dc.Reddit.InboundAdapter to receive post
+    from reddit and call the FilterPostRoutingRule process.
+    """
+    def get_adapter_type():
         """
         Name of the registred Adapter
         """
@@ -98,14 +105,18 @@ class RedditServiceWithIrisAdapter(BusinessService):
         return
 
 class RedditServiceWithPexAdapter(BusinessService):
-
-    def getAdapterType():
+    """
+    This service use our python Python.RedditInboundAdapter to receive post
+    from reddit and call the FilterPostRoutingRule process.
+    """
+    def get_adapter_type():
         """
         Name of the registred Adapter
         """
         return "Python.RedditInboundAdapter"
 
     def on_process_input(self, message_input):
+        self._wait_for_next_call_interval = True
         msg = iris.cls("dc.Demo.PostMessage")._New()
         msg.Post = message_input
         return self.send_request_sync(self.target,msg)
