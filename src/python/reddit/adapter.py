@@ -4,6 +4,15 @@ import iris
 import json
 
 class RedditInboundAdapter(InboundAdapter):
+    """
+    This is an example of a custom InboundAdapter.
+    
+    This adapter is used to fetch data from the reddit API.
+    
+    It is used by the RedditService service.
+    """
+
+    limit = "3"
     
     def on_init(self):
         
