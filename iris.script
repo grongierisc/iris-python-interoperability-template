@@ -4,19 +4,7 @@
  zn "IRISAPP"
  zpm "install pex-embbeded-python" 
  do $System.OBJ.LoadDir("/irisdev/app/src","ck",,1)
- zpm "install sslclient"
 
- //Register Python code
- zw ##class(Grongier.PEX.Utils).RegisterComponent("adapter","RedditInboundAdapter","/irisdev/app/src/python/reddit/",1,"Python.RedditInboundAdapter")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bs","RedditServiceWithIrisAdapter","/irisdev/app/src/python/reddit/",1,"Python.RedditServiceWithIrisAdapter")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bs","RedditServiceWithPexAdapter","/irisdev/app/src/python/reddit/|/irisdev/app/src/python/Reddit/",1,"Python.RedditServiceWithPexAdapter")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bs","RedditService","/irisdev/app/src/python/reddit/|/irisdev/app/src/python/Reddit/",1,"Python.RedditService")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bp","FilterPostRoutingRule","/irisdev/app/src/python/reddit/|/irisdev/app/src/python/Reddit/",1,"Python.FilterPostRoutingRule")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","FileOperationWithIrisAdapter","/irisdev/app/src/python/reddit/",1,"Python.FileOperationWithIrisAdapter")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","FileOperation","/irisdev/app/src/python/reddit/",1,"Python.FileOperation")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","EmailOperation","/irisdev/app/src/python/reddit/",1,"Python.EmailOperation")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","EmailOperationWithIrisAdapter","/irisdev/app/src/python/reddit/",1,"Python.EmailOperationWithIrisAdapter")
- 
  set ^EnsPortal.Settings("SuperUser","LastProduction")	= "dc.Demo.Production"
  
  zn "%SYS"
