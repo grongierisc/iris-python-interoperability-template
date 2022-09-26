@@ -3,7 +3,7 @@ from grongier.pex import BusinessProcess
 from message import PostMessage
 from obj import PostClass
 
-import iris
+
 
 class FilterPostRoutingRule(BusinessProcess):
     """
@@ -18,16 +18,6 @@ class FilterPostRoutingRule(BusinessProcess):
             self.target = "Python.FileOperation"
         
         return
-
-    def iris_to_python(self, request:'iris.dc.Demo.PostMessage'):
-
-        request = PostMessage(post=PostClass(title=request.Post.Title, 
-                                             selftext=request.Post.Selftext,
-                                             author=request.Post.Author, 
-                                             url=request.Post.Url,
-                                             created_utc=request.Post.CreatedUTC,
-                                             original_json=request.Post.OriginalJSON))
-        return self.on_python_message(request)
 
     def on_python_message(self, request: PostMessage):
         if 'dog'.upper() in request.post.selftext.upper():
