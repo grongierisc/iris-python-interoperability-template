@@ -39,3 +39,7 @@ RUN --mount=type=bind,source=/,target=/builder/root,from=builder \
 ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "IRISAPP"
+
+COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} entrypoint.sh /
+
+ENTRYPOINT [ "/tini", "--", "/entrypoint.sh" ]
