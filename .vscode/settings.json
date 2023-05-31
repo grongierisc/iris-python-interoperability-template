@@ -15,8 +15,19 @@
       "active": true,
       "links": {
         "Production": "http://localhost:${port}/csp/irisapp/EnsPortal.ProductionConfig.zen?PRODUCTION=dc.Demo.Production"
-}
+      }
     },
+    "intersystems.servers": {
+			"devcontainer": {
+				"username": "SuperUser",
+				"password": "SYS",
+				"webServer": {
+					"scheme": "http",
+					"host": "127.0.0.1",
+					"port": 52773
+				},
+			},
+		},
     "sqltools.connections": [
       {
         "namespace": "IRISAPP",
@@ -31,6 +42,10 @@
         "username": "_SYSTEM",
         "password": "SYS"
       }
-    ]
+    ],
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
 
 }
