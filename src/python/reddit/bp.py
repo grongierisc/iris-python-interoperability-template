@@ -29,7 +29,7 @@ class FilterPostRoutingRule(BusinessProcess):
         if 'cat'.upper() in request.post.selftext.upper():
             request.to_email_address = 'cat@company.com'
             request.found = 'Cat'
-
+            self.log_info("Found a cat")
         if request.found is not None:
             self.send_request_sync(self.target,request)
 
