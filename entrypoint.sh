@@ -7,9 +7,9 @@ set -m
 /usr/irissys/dev/Cloud/ICM/waitISC.sh
 
 # set default production
-iop -d dc.Python.Production
+iop --default dc.Python.Production
 
 # start production
-iop grongier.pex -s &
+iop --start &
 
 fg %1

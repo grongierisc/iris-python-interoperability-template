@@ -40,6 +40,10 @@ ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "IRISAPP"
 
+RUN pip install iris-pex-embedded-python
+
+ENV LD_LIBRARY_PATH=${ISC_PACKAGE_INSTALLDIR}/bin:${LD_LIBRARY_PATH}
+
 COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} entrypoint.sh /
 
 ENTRYPOINT [ "/tini", "--", "/entrypoint.sh" ]
