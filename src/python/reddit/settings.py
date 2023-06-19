@@ -22,7 +22,7 @@ PRODUCTIONS = [
                 "@Name": "Python.FileOperation",
                 "@Category": "",
                 "@ClassName": "Python.FileOperation",
-                "@PoolSize": "1",
+                "@PoolSize": os.getenv('POOL_SIZE', '1'),
                 "@Enabled": "true",
                 "@Foreground": "false",
                 "@Comment": "",
