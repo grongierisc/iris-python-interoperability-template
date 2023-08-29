@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="interoperability-sample.ZPM">
+  <Document name="iris-python-interop-template.ZPM">
     <Module>
-      <Name>interoperability-sample</Name>
-      <Description>A simple IRIS interoperability application - reads data from Reddit and filter it.</Description>
-      <Version>0.0.3</Version>
+      <Name>iris-python-interop-template</Name>
+      <Description>An demo package</Description>
+      <Version>0.0.1</Version>
       <Packaging>module</Packaging>
       <Dependencies>
         <ModuleReference>
-          <Name>sslclient</Name>
-          <Version>1.0.1</Version>
+          <Name>pex-embbeded-python</Name>
+          <Version>2.3.8</Version>
         </ModuleReference>
       </Dependencies>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="Ens.Config.DefaultSettings.ESD"/>
-      <Resource Name="TestLookupTable.LUT"/>
-      <Resource Name="dc.Reddit.PKG"/>
-      <Resource Name="dc.Demo.PKG"/>
-      <SystemRequirements Version=">=2020.1" Interoperability="enabled" />
+      <SystemRequirements Version=">=2021.2" Interoperability="enabled" />
     </Module>
   </Document>
 </Export>
