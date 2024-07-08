@@ -1,4 +1,4 @@
-from grongier.pex import BusinessProcess
+from iop import BusinessProcess
 
 from message import PostMessage
 from obj import PostClass
@@ -39,4 +39,4 @@ class FilterPostRoutingRule(BusinessProcess):
 
         if request.found is not None:
             self.send_request_sync(self.target,request)
-        return
+        return iris.cls('Ens.Response')._New()

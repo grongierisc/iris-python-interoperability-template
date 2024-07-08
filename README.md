@@ -48,7 +48,7 @@ This proof of concept aims to show how the **iris interoperability framework** c
 ## 1.2. Example
 
 ```python
-from grongier.pex import BusinessOperation,Message
+from iop import BusinessOperation,Message
 
 class MyBusinessOperation(BusinessOperation):
     
@@ -89,7 +89,7 @@ class MyResponse(Message):
 
 ## 1.3. Register a component 
 
-Thanks to the method grongier.pex.Utils.register_component() : 
+Thanks to the method iop.Utils.register_component() : 
 
 Start an embedded python shell :
 
@@ -99,14 +99,14 @@ Start an embedded python shell :
 
 Then use this class method to add a python class to the component list for interoperability.
 ```python
-from grongier.pex import Utils
+from iop import Utils
 
 Utils.register_component(<ModuleName>,<ClassName>,<PathToPyFile>,<OverWrite>,<NameOfTheComponent>)
 ```
 
 e.g :
 ```python
-from grongier.pex import Utils
+from iop import Utils
 
 Utils.register_component("MyCombinedBusinessOperation","MyCombinedBusinessOperation","/irisdev/app/src/python/demo/",1,"PEX.MyCombinedBusinessOperation")
 ```
@@ -296,7 +296,7 @@ This file will allow us to create the classes to import in the code.<br>
 It gets from the multiple files seen earlier the classes and make them into callable classes.
 That way, when you wish to create a business operation, for example, you can just do:
 ```python
-from grongier.pex import BusinessOperation
+from iop import BusinessOperation
 ```
 
 ## 7.2. The `common` class
@@ -355,7 +355,7 @@ TypeError: if request is not of type Message or IRISObject.
 
 
 ## 7.4. The `inbound_adapter` class
-Inbound Adapter in Python are subclass from grongier.pex.InboundAdapter in Python, that inherit from all the functions of the [common class](#72-the-common-class).<br>
+Inbound Adapter in Python are subclass from iop.InboundAdapter in Python, that inherit from all the functions of the [common class](#72-the-common-class).<br>
 This class is responsible for receiving the data from the external system, validating the data, and sending it to the business service by calling the BusinessHost process_input method.
 This class defines:
 
@@ -364,7 +364,7 @@ The message can have any structure agreed upon by the inbound adapter and the bu
 
 Example of an inbound adapter ( situated in the src/python/demo/reddit/adapter.py file ):
 ```python
-from grongier.pex import InboundAdapter
+from iop import InboundAdapter
 import requests
 import iris
 import json
@@ -426,7 +426,7 @@ class RedditInboundAdapter(InboundAdapter):
 ```
 
 ## 7.5. The `outbound_adapter` class
-Outbound Adapter in Python are subclass from grongier.pex.OutboundAdapter in Python, that inherit from all the functions of the [common class](#72-the-common-class).<br>
+Outbound Adapter in Python are subclass from iop.OutboundAdapter in Python, that inherit from all the functions of the [common class](#72-the-common-class).<br>
 This class is responsible for sending the data to the external system.
 
 The Outbound Adapter gives the Operation the possibility to have a heartbeat notion.
@@ -459,7 +459,7 @@ There are three ways of implementing a business service:<br>
 - Nonpolling business service - The production framework does not initiate the business service. Instead custom code in either a long-running process 
     or one that is started at regular intervals initiates the business service by calling the Director.CreateBusinessService() method.
 
-Business service in Python are subclass from grongier.pex.BusinessService in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
+Business service in Python are subclass from iop.BusinessService in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
 This class defines:
 
 `on_process_input`: Receives the message from the inbond adapter via the PRocessInput method and is responsible for forwarding it to target business processes or operations.<br>
@@ -472,7 +472,7 @@ The message can have any structure agreed upon by the inbound adapter and the bu
 
 Example of a business service ( situated in the src/python/demo/reddit/bs.py file ):
 ```python
-from grongier.pex import BusinessService
+from iop import BusinessService
 
 import iris
 
@@ -509,7 +509,7 @@ Typically contains most of the logic in a production.<br>
 A business process can receive messages from a business service, another business process, or a business operation.<br>
 It can modify the message, convert it to a different format, or route it based on the message contents.<br>
 The business process can route a message to a business operation or another business process.<br>
-Business processes in Python are subclass from grongier.pex.BusinessProcess in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
+Business processes in Python are subclass from iop.BusinessProcess in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
 This class defines:
 
 `on_request`: Handles requests sent to the business process. A production calls this method whenever an initial request for a specific business process arrives on the appropriate queue and is assigned a job in which to execute.<br>
@@ -550,7 +550,7 @@ An instance of IRISObject or subclass of Message that contains the response mess
 
 Example of a business process ( situated in the src/python/demo/reddit/bp.py file ):
 ```python
-from grongier.pex import BusinessProcess
+from iop import BusinessProcess
 
 from message import PostMessage
 from obj import PostClass
@@ -589,7 +589,7 @@ This class is responsible for sending the data to an external system or a local 
 The business operation can optionally use an adapter to handle the outgoing message which is specified overriding the get_adapter_type method.<br>
 If the business operation has an adapter, it uses the adapter to send the message to the external system.<br>
 The adapter can either be a PEX adapter, an ObjectScript adapter or a [python adapter](#75-the-outbound_adapter-class).<br>
-Business operation in Python are subclass from grongier.pex.BusinessOperation in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
+Business operation in Python are subclass from iop.BusinessOperation in Python, that inherit from all the functions of the [business host](#73-the-business_host-class).<br>
 
 ### 7.8.1. The dispacth system
 In a business operation it is possbile to create any number of function [similar to the on_message method](#782-the-methods) that will take as argument a [typed request](#711-the-messages) like this `my_special_message_method(self,request: MySpecialMessage)`.
@@ -611,7 +611,7 @@ The response object
 
 Example of a business operation ( situated in the src/python/demo/reddit/bo.py file ):
 ```python
-from grongier.pex import BusinessOperation
+from iop import BusinessOperation
 
 from message import MyRequest,MyMessage
 
@@ -698,13 +698,13 @@ class PostClass:
 
 ## 7.11. The `messages`
 The messages will contain one or more [objects](#710-the-objects), located in the `obj.py` file.<br>
-Messages, requests and responses all inherit from the `grongier.pex.Message` class.
+Messages, requests and responses all inherit from the `iop.Message` class.
 
 These messages will allow us to transfer information between any business service/process/operation.
 
 Example of a message ( situated in the src/python/demo/reddit/message.py file ):
 ```python
-from grongier.pex import Message
+from iop import Message
 
 from dataclasses import dataclass
 
@@ -737,13 +737,13 @@ Start an embedded python shell :
 Then use this class method to add a new py file to the component list for interoperability.
 
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_component(<ModuleName>,<ClassName>,<PathToPyFile>,<OverWrite>,<NameOfTheComponent>)
 ```
 
 e.g :
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_component("MyCombinedBusinessOperation","MyCombinedBusinessOperation","/irisdev/app/src/python/demo/",1,"PEX.MyCombinedBusinessOperation")
 ```
 
@@ -758,13 +758,13 @@ Start an embedded python shell :
 Then use this class method to add a new py file to the component list for interoperability.
 
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_file(<File>,<OverWrite>,<PackageName>)
 ```
 
 e.g :
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_file("/irisdev/app/src/python/demo/bo.py",1,"PEX")
 ```
 
@@ -779,13 +779,13 @@ Start an embedded python shell :
 Then use this class method to add a new py file to the component list for interoperability.
 
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_folder(<Path>,<OverWrite>,<PackageName>)
 ```
 
 e.g :
 ```python
-from grongier.pex import Utils
+from iop import Utils
 Utils.register_folder("/irisdev/app/src/python/demo/",1,"PEX")
 ```
 
