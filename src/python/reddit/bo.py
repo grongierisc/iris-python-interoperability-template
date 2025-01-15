@@ -7,6 +7,7 @@ import os
 import datetime
 
 from message import PostMessage
+from obj import PostClass
 
 class FileOperation(BusinessOperation):
     """
@@ -81,3 +82,11 @@ class FileOperationWithIrisAdapter(BusinessOperation):
         self.Adapter.PutLine(filename, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
 
         return
+
+if __name__ == "__main__":
+    bo = FileOperation()
+    msg = PostMessage()
+    msg.post = PostClass(title="Test",selftext="Test",author="Test",url="http://test.com",created_utc=0)
+    msg.found = "Test"
+    bo.on_post_message(msg)
+    
