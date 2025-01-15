@@ -1,3 +1,4 @@
 dataclasses-json==0.5.7
 requests==2.31.0
 iris-pex-embedded-python>=3.0.0
+pytest
