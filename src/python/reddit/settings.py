@@ -28,11 +28,23 @@ PRODUCTIONS = [
                 "@Comment": "",
                 "@LogTraceEvents": "true",
                 "@Schedule": "",
-                "Setting": {
-                    "@Target": "Host",
-                    "@Name": "%settings",
-                    "#text": "path=/tmp"
-                }
+                "Setting": [
+                    {
+                        "@Target": "Host",
+                        "@Name": "%settings",
+                        "#text": "path=/tmp"
+                    },
+                    {
+                        "@Target": "Host",
+                        "@Name": "enable",
+                        "#text": "1"
+                    },
+                    {
+                        "@Target": "Host",
+                        "@Name": "port",
+                        "#text": "55550"
+                    }
+                ]
             },
             {
                 "@Name": "Python.RedditService",
