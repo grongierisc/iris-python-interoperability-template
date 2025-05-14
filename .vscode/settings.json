@@ -43,13 +43,6 @@
         "password": "SYS"
       }
     ],
-    "[python]": {
-      "editor.defaultFormatter": "ms-python.autopep8"
-    },
-    "python.formatting.provider": "none",
-    "python.testing.pytestArgs": [
-      "src"
-    ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.analysis.extraPaths": [

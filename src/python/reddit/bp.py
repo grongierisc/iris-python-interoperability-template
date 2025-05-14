@@ -38,5 +38,5 @@ class FilterPostRoutingRule(BusinessProcess):
             request.found = 'Cat'
 
         if request.found is not None:
-            self.send_request_sync(self.target,request)
-        return iris.cls('Ens.Response')._New()
+            rsp = self.send_request_sync(self.target,request)
+        return iris.cls('Ens.StringResponse')._New(rsp.found)
