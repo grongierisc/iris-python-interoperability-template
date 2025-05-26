@@ -36,12 +36,12 @@ PRODUCTIONS = [
                     },
                     {
                         "@Target": "Host",
-                        "@Name": "enable",
+                        "@Name": "%enable",
                         "#text": "1"
                     },
                     {
                         "@Target": "Host",
-                        "@Name": "port",
+                        "@Name": "%port",
                         "#text": "55550"
                     }
                 ]
