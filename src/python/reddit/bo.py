@@ -14,9 +14,16 @@ class FileOperation(BusinessOperation):
     This operation receive a PostMessage and write down in the right company
     .txt all the important information and the time of the operation
     """
+
+    path = "/tmp"
+
     def on_init(self):
-        if hasattr(self,'path'):
-            os.chdir(self.path)
+        """
+        This method is called when the operation is created.
+        """
+
+        if not os.path.exists(self.path):
+            os.makedirs(self.path)
 
     def on_post_message(self, request: PostMessage):
         """
@@ -33,7 +40,7 @@ class FileOperation(BusinessOperation):
             ts = datetime.datetime.fromtimestamp(request.post.created_utc).__str__()
 
         line = ts+" : "+title+" : "+author+" : "+url
-        filename = request.found+".txt"
+        filename = (request.found or "default")+".txt"
 
 
         self.put_line(filename, line)
@@ -56,6 +63,7 @@ class FileOperationWithIrisAdapter(BusinessOperation):
     .txt all the important information and the time of the operation using the iris
     adapter EnsLib.File.OutboundAdapter
     """
+    @staticmethod
     def get_adapter_type():
         """
         Name of the registred Adapter

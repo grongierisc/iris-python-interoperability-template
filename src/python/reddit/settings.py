@@ -1,6 +1,8 @@
+import os
+
 import bp
-from bo import *
-from bs import *
+from bo import FileOperation, FileOperationWithIrisAdapter
+from bs import RedditService
 
 CLASSES = {
     'Python.RedditService': RedditService,
@@ -31,11 +33,6 @@ PRODUCTIONS = [
                 "Setting": [
                     {
                         "@Target": "Host",
-                        "@Name": "%settings",
-                        "#text": "path=/tmp"
-                    },
-                    {
-                        "@Target": "Host",
                         "@Name": "%enable",
                         "#text": "1"
                     },
@@ -55,14 +52,7 @@ PRODUCTIONS = [
                 "@Foreground": "false",
                 "@Comment": "",
                 "@LogTraceEvents": "false",
-                "@Schedule": "",
-                "Setting": [
-                    {
-                        "@Target": "Host",
-                        "@Name": "%settings",
-                        "#text": "limit=10\nother<10"
-                    }
-                ]
+                "@Schedule": ""
             },
             {
                 "@Name": "Python.FilterPostRoutingRule",

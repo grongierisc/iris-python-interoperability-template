@@ -1,7 +1,9 @@
 from iop import BusinessService
 
+from typing import Optional
 import json
 import requests
+
 
 from message import PostMessage
 from obj import PostClass
@@ -12,6 +14,11 @@ class RedditService(BusinessService):
     seconds, use requests to fetch self.limit posts as data from the reddit
     API before calling the FilterPostRoutingRule process.
     """
+    feed = "/new/"
+    limit = "5"
+    target = "Python.FilterPostRoutingRule"
+
+    @staticmethod
     def get_adapter_type():
         """
         Name of the registred Adapter
@@ -22,21 +29,12 @@ class RedditService(BusinessService):
         """
         This method is called when the service is created.
         """
-        
-        if not hasattr(self,'feed'):
-            self.feed = "/new/"
-        
-        if not hasattr(self,'limit'):
-            raise TypeError('no limit field')
+        if self.limit is None:
+            self.limit = "5"
 
-        if not hasattr(self,'target'):
-            self.target = "Python.FilterPostRoutingRule"
-        
-        self.last_post_name = ""
-        
-        return 1
+        self.last_post_name = "t3_tjflyd"  # This is the last post name to start from, it should be updated after the first fetch.
 
-    def on_process_input(self,request):
+    def on_process_input(self,message_input):
         """
         This method is called every 5 seconds by the Ens.InboundAdapter.
         """
@@ -47,7 +45,7 @@ class RedditService(BusinessService):
             msg.post = post
             self.send_request_sync(self.target,msg)
 
-    def on_task(self) -> PostClass:
+    def on_task(self) -> Optional[PostClass]:
         """
         This method is called by on_process_input to fetch the data from the
         reddit API.

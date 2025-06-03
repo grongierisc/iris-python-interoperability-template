@@ -30,12 +30,13 @@ class FilterPostRoutingRule(BusinessProcess):
         return self.on_python_message(request)
 
     def on_python_message(self, request: PostMessage):
-        if 'dog'.upper() in request.post.selftext.upper():
-            request.to_email_address = 'dog@company.com'
-            request.found = 'Dog'
-        if 'cat'.upper() in request.post.selftext.upper():
-            request.to_email_address = 'cat@company.com'
-            request.found = 'Cat'
+        if request.post and request.post.selftext:
+            if 'dog'.upper() in request.post.selftext.upper():
+                request.to_email_address = 'dog@company.com'
+                request.found = 'Dog'
+            if 'cat'.upper() in request.post.selftext.upper():
+                request.to_email_address = 'cat@company.com'
+                request.found = 'Cat'
 
         if request.found is not None:
             rsp = self.send_request_sync(self.target,request)

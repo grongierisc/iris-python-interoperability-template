@@ -1,12 +1,11 @@
 from iop import Message
-
+from typing import Optional
 from dataclasses import dataclass
-
 from obj import PostClass
 
 @dataclass
 class PostMessage(Message):
 
-    post:PostClass = None
-    to_email_address:str = None
-    found:str = None
+    post:Optional[PostClass] = None
+    to_email_address:Optional[str] = None
+    found:Optional[str] = None
