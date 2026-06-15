@@ -14,7 +14,7 @@ CLASSES = {
 PRODUCTIONS = [
     {
         'dc.Python.Production': {
-        "@Name": "dc.Demo.Production",
+        "@Name": "dc.Python.Production",
         "@TestingEnabled": "true",
         "@LogGeneralTraceEvents": "false",
         "Description": "",
