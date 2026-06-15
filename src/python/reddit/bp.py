@@ -1,43 +1,42 @@
-from iop import BusinessProcess
+import re
 
-from message import PostMessage
-from obj import PostClass
+from iop import BusinessProcess, target
 
-import iris
+from messages import ClassifiedThread, RedditThread
 
-class FilterPostRoutingRule(BusinessProcess):
-    """
-    This process receive a PostMessage containing a reddit post.
-    It then understand if the post is about a dog or a cat or nothing and
-    fill the right infomation inside the PostMessage before sending it to
-    the FileOperation operation.
-    """
-    def on_init(self):
-        
-        if not hasattr(self,'target'):
-            self.target = "Python.FileOperation"
-        
-        return
+CAT_PATTERN = re.compile(r"\bcat\b", flags=re.IGNORECASE)
+DOG_PATTERN = re.compile(r"\bdog\b", flags=re.IGNORECASE)
 
-    def iris_to_python(self, request:'iris.dc.Demo.PostMessage'):
 
-        request = PostMessage(post=PostClass(title=request.Post.Title, 
-                                             selftext=request.Post.Selftext,
-                                             author=request.Post.Author, 
-                                             url=request.Post.Url,
-                                             created_utc=request.Post.CreatedUTC,
-                                             original_json=request.Post.OriginalJSON))
-        return self.on_python_message(request)
+class KeywordRouterProcess(BusinessProcess):
+    """Route Reddit titles to cat or dog output operations."""
 
-    def on_python_message(self, request: PostMessage):
-        if request.post and request.post.selftext:
-            if 'dog'.upper() in request.post.selftext.upper():
-                request.to_email_address = 'dog@company.com'
-                request.found = 'Dog'
-            if 'cat'.upper() in request.post.selftext.upper():
-                request.to_email_address = 'cat@company.com'
-                request.found = 'Cat'
+    CatTarget = target()
+    DogTarget = target()
 
-        if request.found is not None:
-            rsp = self.send_request_sync(self.target,request)
-        return iris.cls('Ens.StringResponse')._New(rsp.found)
+    def on_message(self, request: RedditThread):
+        title = request.title.strip()
+        if not title:
+            return None
+
+        if CAT_PATTERN.search(title):
+            self.send_request_async(
+                self.CatTarget,
+                ClassifiedThread(
+                    title=title,
+                    destination_file="cat.txt",
+                    permalink=request.permalink,
+                ),
+            )
+
+        if DOG_PATTERN.search(title):
+            self.send_request_async(
+                self.DogTarget,
+                ClassifiedThread(
+                    title=title,
+                    destination_file="dog.txt",
+                    permalink=request.permalink,
+                ),
+            )
+
+        return None
