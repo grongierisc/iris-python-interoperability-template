@@ -1,5 +1,4 @@
 dataclasses-json
 requests
-iris-pex-embedded-python==4.0.0b14
-# iris-embedded-python-wrapper==0.6.0b1
+iris-pex-embedded-python>=4.0.0
 pytest
