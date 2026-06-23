@@ -4,7 +4,7 @@ set -m
 
 fg %1
 
-/usr/irissys/dev/Cloud/ICM/waitISC.sh
+/usr/irissys/dev/Container/waitReady.sh
 
 # init iop
 iop --init
